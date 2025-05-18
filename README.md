@@ -5,6 +5,21 @@ Working against RC1
 
 ## Testing
 
+### SSE
+
+Print incoming events (-N no buffer)
+```
+ curl -N -H 'Accept: text/event-stream'  http://localhost:8080/sse
+```
+
+gives a response like
+```
+event:endpoint
+data:/mcp/message?sessionId=2d9ffdbd-b022-487e-8a94-236c0ecb3f62
+``` 
+ 
+# Stdio
+
 Build mcp-app.jar
 ```
 cd mcp
@@ -25,20 +40,6 @@ cat requests.json | java -jar $MCP_HOME/mcp-app/build/libs/mcp-app.jar --spring.
 ```
 Currently this is starting a server and not processing the commands
 
-
-### SSE
-
-Print incoming events (-N no buffer)
-```
- curl -N -H 'Accept: text/event-stream'  http://localhost:8080/sse
-```
-
-gives a response like
-```
-event:endpoint
-data:/mcp/message?sessionId=2d9ffdbd-b022-487e-8a94-236c0ecb3f62
-``` 
- 
  
 ## References
 - https://docs.spring.io/spring-ai/reference/1.0/index.html
