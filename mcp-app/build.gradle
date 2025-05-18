@@ -34,6 +34,11 @@ tasks.register("runMcpTestSse", JavaExec) {
     classpath = sourceSets.test.runtimeClasspath
 
     mainClass.set("com.cyster.mcp.McpTestSse")
+    
+    jvmArgs = [
+      "-Dlogging.level.reactor.netty.http.client=DEBUG",
+      "-Dlogging.level.reactor.netty.http.client.HttpClient=DEBUG"
+    ]
 }
 
 tasks.register("runMcpTestStdio", JavaExec) {
