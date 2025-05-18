@@ -18,10 +18,12 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux:1.0.0-RC1"    
-    //implementation "io.modelcontextprotocol.sdk:mcp:0.10.0"
-    //implementation "io.modelcontextprotocol.sdk:mcp-spring-webflux:0.10.0"
-    //implementation "org.springframework.ai:spring-ai-model:1.0.0-RC1"
+   implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux:1.0.0-RC1"
+   
+   // implementation "org.springframework.ai:spring-ai-starter-mcp-server-webmvc:1.0.0-RC1"
+          
+   // implementation "org.springframework.ai:spring-ai-starter-mcp-server:1.0.0-RC1"    
+   // implementation "org.springframework:spring-web"
 }
 
 tasks.register("runMcpTestSse", JavaExec) {
