@@ -123,7 +123,7 @@ curl -i -X POST \
   }'
 ```
 
-There commands where derived by running `gradle :mcp-app:runMcpTestSse` and asking ChatGPT to convert the debug output to curls.
+These commands where derived by running `gradle :mcp-app:runMcpTestSse` and asking ChatGPT to convert the debug output to curls.
 
 ### Command line Stdio
 
@@ -138,7 +138,7 @@ create some commands
 ```
 cat <<EOF > requests.json
 {"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}
-{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"weather","arguments":{"location":"London"}}}
+{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"getWeatherForecastByLocation","arguments":{"latitude": 47.6062, "longitude": -122.3321}}}
 EOF
 ```
 
