@@ -5,7 +5,18 @@ Working against RC1
 
 ## Testing
 
-### SSE
+###
+
+```
+gradle :mcp-app:runMcpTestSse
+```
+
+```
+gradle :mcp-app:runMcpTestStdio
+```
+currently errors - TBD
+
+### Command line SSE
 
 Print incoming events (-N no buffer)
 ```
@@ -18,7 +29,7 @@ event:endpoint
 data:/mcp/message?sessionId=2d9ffdbd-b022-487e-8a94-236c0ecb3f62
 ``` 
  
-# Stdio
+### Command line Stdio
 
 Build mcp-app.jar
 ```
