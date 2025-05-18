@@ -1,0 +1,30 @@
+plugins {
+  id 'java'
+}
+
+group = 'com.cyster'
+version = '0.0.1-SNAPSHOT'
+
+def javaVersion = project.property('java.toolchain.version').toInteger()
+
+java {
+  toolchain {
+      languageVersion = JavaLanguageVersion.of(javaVersion)
+  }
+  sourceCompatibility = JavaVersion.toVersion(javaVersion)
+}
+  
+allprojects {
+  repositories {
+    mavenCentral()
+  }
+  
+  tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+  }
+}
+    
+subprojects {
+  apply plugin: 'java'
+}
+

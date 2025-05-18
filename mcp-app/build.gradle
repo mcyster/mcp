@@ -1,0 +1,46 @@
+plugins {
+    id "org.springframework.boot"
+    id "io.spring.dependency-management"
+    id "java"
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/milestone" }
+    //maven { url "https://repo.spring.io/snapshot" }
+}
+
+
+dependencyManagement {
+  imports {
+    mavenBom "org.springframework.ai:spring-ai-bom:1.0.0-RC1"
+  }
+}
+
+dependencies {
+    implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux:1.0.0-RC1"    
+    //implementation "io.modelcontextprotocol.sdk:mcp:0.10.0"
+    //implementation "io.modelcontextprotocol.sdk:mcp-spring-webflux:0.10.0"
+    //implementation "org.springframework.ai:spring-ai-model:1.0.0-RC1"
+}
+
+tasks.register("runMcpTestSse", JavaExec) {
+    group = "application"
+    description = "Launch the SSE test client from test sources"
+
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+
+    mainClass.set("com.cyster.mcp.McpTestSse")
+}
+
+tasks.register("runMcpTestStdio", JavaExec) {
+    group = "application"
+    description = "Launch the STDIO test client from test sources"
+
+    dependsOn testClasses
+    dependsOn bootJar    
+    classpath = sourceSets.test.runtimeClasspath
+
+    mainClass.set("com.cyster.mcp.McpTestStdio")
+}
