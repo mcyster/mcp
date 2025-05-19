@@ -2,6 +2,7 @@ plugins {
     id "org.springframework.boot"
     id "io.spring.dependency-management"
     id "java"
+    id "application"
 }
 
 repositories {
@@ -20,12 +21,12 @@ dependencyManagement {
 dependencies {
   implementation 'org.springframework.ai:spring-ai-starter-mcp-client'  
   implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+  implementation 'commons-cli:commons-cli:1.9.0'
 }
 
-tasks.register("runMcpTool", JavaExec) {
-    group = "application"
-    description = "Run the MCPTool client"
-    classpath = sourceSets.main.runtimeClasspath
-    mainClass.set("com.cyster.mcp.tool.McpTool")
+
+application {
+    mainClass = 'com.cyster.mcp.tool.McpTool'
 }
+
 
