@@ -12,10 +12,10 @@ build/
 /out/
 
 ## Eclipse
-/.metadata/
-/bin/
-/.settings/
-/.project
+.metadata/
+bin/
+.settings/
+.project
 .classpath
 
 ## IntelliJ IDEA
