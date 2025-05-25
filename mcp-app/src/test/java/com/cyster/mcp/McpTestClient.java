@@ -10,32 +10,32 @@ import io.modelcontextprotocol.spec.McpSchema.ListToolsResult;
 
 public class McpTestClient {
 
-	private final McpClientTransport transport;
+    private final McpClientTransport transport;
 
-	public McpTestClient(McpClientTransport transport) {
-		this.transport = transport;
-	}
+    public McpTestClient(McpClientTransport transport) {
+        this.transport = transport;
+    }
 
-	public void run() {
+    public void run() {
 
-		var client = McpClient.sync(this.transport).build();
+        var client = McpClient.sync(this.transport).build();
 
-		client.initialize();
+        client.initialize();
 
-		client.ping();
+        client.ping();
 
-		ListToolsResult toolsList = client.listTools();
-		System.out.println("Available Tools = " + toolsList);
+        ListToolsResult toolsList = client.listTools();
+        System.out.println("Available Tools = " + toolsList);
 
-		CallToolResult weatherForcastResult = client.callTool(new CallToolRequest("getWeatherForecastByLocation",
-				Map.of("latitude", "47.6062", "longitude", "-122.3321")));
-		System.out.println("Weather Forcast: " + weatherForcastResult);
+        CallToolResult weatherForcastResult = client.callTool(new CallToolRequest("getWeatherForecastByLocation",
+                Map.of("latitude", "47.6062", "longitude", "-122.3321")));
+        System.out.println("Weather Forcast: " + weatherForcastResult);
 
-		CallToolResult alertResult = client.callTool(new CallToolRequest("getAlerts", Map.of("state", "NY")));
-		System.out.println("Alert Response = " + alertResult);
+        CallToolResult alertResult = client.callTool(new CallToolRequest("getAlerts", Map.of("state", "NY")));
+        System.out.println("Alert Response = " + alertResult);
 
-		client.closeGracefully();
+        client.closeGracefully();
 
-	}
+    }
 
 }
