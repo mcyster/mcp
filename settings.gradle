@@ -18,6 +18,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "mcp"
-include "mcp-app"
+include "simple-app"
 include "mcp-tool"
 
