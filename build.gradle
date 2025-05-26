@@ -1,20 +1,11 @@
 plugins {
-    id "org.springframework.boot"
     id "io.spring.dependency-management"
     id "java"
-    id "application"
 }
 
 repositories {
     mavenCentral()
     maven { url = "https://repo.spring.io/milestone" }
-}
-
-dependencyManagement {
-  imports {
-    mavenBom "org.springframework.ai:spring-ai-bom:1.0.0"
-    mavenBom "io.modelcontextprotocol.sdk:mcp-bom:0.10.0"
-  }
 }
 
 dependencies {
@@ -23,7 +14,14 @@ dependencies {
   implementation 'commons-cli:commons-cli:1.9.0'
 }
 
-application {
-  mainClass = 'com.cyster.mcp.tool.McpTool'
+subprojects {
+    apply plugin: "io.spring.dependency-management"
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.ai:spring-ai-bom:1.0.0"
+            mavenBom "io.modelcontextprotocol.sdk:mcp-bom:0.10.0"
+        }
+    }
 }
 

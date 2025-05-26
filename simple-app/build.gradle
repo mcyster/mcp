@@ -1,7 +1,7 @@
 plugins {
     id "org.springframework.boot"
-    id "io.spring.dependency-management"
     id "java"
+    id "application"
 }
 
 repositories {
@@ -10,15 +10,8 @@ repositories {
     //maven { url = "https://repo.spring.io/snapshot" }
 }
 
-
-dependencyManagement {
-  imports {
-    mavenBom "org.springframework.ai:spring-ai-bom:1.0.0"
-  }
-}
-
 dependencies {
-   implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux:1.0.0"
+   implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux"
 }
 
 tasks.register("runMcpTestSse", JavaExec) {
