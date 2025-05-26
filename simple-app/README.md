@@ -1,6 +1,30 @@
 
 # Simple Spring MCP Server 
 
+## Cursor
+
+Setup an MCP entry in
+
+$MCP_HOME/.cursor/mcp.json
+```
+{
+  "mcpServers": {
+    "weather-server": {
+      "url": "http://localhost:8080/sse"
+    }
+  }
+}
+```
+
+Then in cusor, ask something like
+> Hi what is the weather in San Francisco
+
+Approve the tool to run
+
+I got the answer
+> The current weather in San Francisco is mostly sunny with a high temperature near 63 degrees Fahrenheit. The wind is coming from the west at around 15 miles per hour, with gusts as high as 23 miles per hour. Tonight, it will be mostly cloudy with a low temperature around 53 degrees Fahrenheit and west wind between 6 to 14 miles per hour.
+ > If you need a detailed forecast for the coming days, let me know.
+
 ## Testing
 
 ###
