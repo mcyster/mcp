@@ -12,7 +12,7 @@ repositories {
 
 dependencyManagement {
   imports {
-    mavenBom "org.springframework.ai:spring-ai-bom:1.0.0-RC1"
+    mavenBom "org.springframework.ai:spring-ai-bom:1.0.0"
     mavenBom "io.modelcontextprotocol.sdk:mcp-bom:0.10.0"
   }
 }
