@@ -1,9 +1,16 @@
 
 # Simple Spring MCP Server 
 
-## Cursor
+## Cursor Integration
 
-Setup an MCP entry in
+Start server
+```
+cd $MCP_HOME
+
+gradle :simple-app:bootRun
+```
+
+Setup an MCP entry in cusor
 
 $MCP_HOME/.cursor/mcp.json
 ```
@@ -16,12 +23,18 @@ $MCP_HOME/.cursor/mcp.json
 }
 ```
 
+Restart the server
+  -  Cursor Settings
+    - MCP
+      - click the restart button on the server
+
 Then in cusor, ask something like
 > Hi what is the weather in San Francisco
 
-Approve the tool to run
+You will have to:
+- Approve the tool to run
 
-I got the answer
+Then I got the answer:
 > The current weather in San Francisco is mostly sunny with a high temperature near 63 degrees Fahrenheit. The wind is coming from the west at around 15 miles per hour, with gusts as high as 23 miles per hour. Tonight, it will be mostly cloudy with a low temperature around 53 degrees Fahrenheit and west wind between 6 to 14 miles per hour.
  > If you need a detailed forecast for the coming days, let me know.
 
