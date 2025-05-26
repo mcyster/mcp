@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 
 @SpringBootApplication
 public class McpApp {
-    private static final Logger logger = LoggerFactory.getLogger(McpApp.class);
-
     public static void main(String[] args) {
         SpringApplication.run(McpApp.class, args);
     }

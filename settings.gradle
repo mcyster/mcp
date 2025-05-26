@@ -1,4 +1,4 @@
-// settings.gradle
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -18,6 +18,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "mcp"
-include "simple-app"
+include "mcp-server"
 include "mcp-tool"
 

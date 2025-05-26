@@ -8,7 +8,7 @@ Working against Spring AI v1.0.0
   - https://github.com/modelcontextprotocol/servers
 
 Repo
-- [simple-app](./simple-app)
+- [mcp-server](./mcp-server)
   - simple use of Spring AI MCP server and tools
 - mcp-tool
   - tool to make MCP tool requests, to help understand the protocol
