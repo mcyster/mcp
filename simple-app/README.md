@@ -1,7 +1,7 @@
 
 # Simple Spring MCP Server 
 
-## Cursor Integration
+## [Cursor](https://www.cursor.com/) Integration
 
 Start server:
 ```
@@ -24,9 +24,9 @@ $MCP_HOME/.cursor/mcp.json
 ```
 
 Restart the server:
-  -  Cursor Settings
-    - MCP
-      - click the restart button on the server
+- Cursor Settings
+  - MCP
+    - click the restart button on the server
 
 Then in cusor, ask something like:
 > Hi what is the weather in San Francisco
