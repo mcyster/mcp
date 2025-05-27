@@ -1,4 +1,4 @@
-package com.cyster.mcp;
+package com.cyster.chat;
 
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
@@ -10,14 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SpringBootApplication
-public class McpApp {
+public class ChatServer {
     public static void main(String[] args) {
-        SpringApplication.run(McpApp.class, args);
+        SpringApplication.run(ChatServer.class, args);
     }
 
-    @Bean
-    public ToolCallbackProvider environentTools(WeatherService weatherService, ToolContextService environmentService) {
-        return MethodToolCallbackProvider.builder().toolObjects(weatherService, environmentService).build();
-    }
-        
 }

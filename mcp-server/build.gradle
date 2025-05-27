@@ -4,12 +4,6 @@ plugins {
     id "application"
 }
 
-repositories {
-    mavenCentral()
-    maven { url = "https://repo.spring.io/milestone" }
-    //maven { url = "https://repo.spring.io/snapshot" }
-}
-
 dependencies {
    implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux"
 }
