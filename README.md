@@ -9,6 +9,8 @@ Working against Spring AI v1.0.0
 
 Repo
 - [mcp-server](./mcp-server)
-  - simple use of Spring AI MCP server and tools
-- mcp-tool
-  - tool to make MCP tool requests, to help understand the protocol
+  - MCP server built using Spring AI
+- [chat-server](./chat-server)
+  - Chat server built using Spring AI
+- [mcp-tool](./mcp-tool)
+  - Tool to make MCP tool requests, to help understand the protocol
