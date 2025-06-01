@@ -5,8 +5,6 @@ import reactor.core.publisher.Mono;
 
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.messages.UserMessage;
-import org.springframework.ai.chat.prompt.Prompt;
 
 @RestController
 @RequestMapping("/chat")
