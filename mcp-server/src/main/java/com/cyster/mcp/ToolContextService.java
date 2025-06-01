@@ -25,8 +25,6 @@ public class ToolContextService {
 
         logger.info("ToolContext.exchange.clientInfo: {}", exchange.getClientInfo());
 
-        String clientInfo = exchange.getClientInfo().toString();
-
         // Meed to get session from Mcp(A)SyncServerExchange
         // looks like this will be in the next release of the MCP java-sdk 0.11.0
         // https://github.com/modelcontextprotocol/java-sdk
