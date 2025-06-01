@@ -7,7 +7,7 @@ Start server:
 ```
 cd $MCP_HOME
 
-gradle :mcp-server:bootRun
+,/gradlew :mcp-server:bootRun
 ```
 
 Setup an MCP entry in cursor:
@@ -45,12 +45,12 @@ If you have problems, increase the log level in the app `$MCP_HOME/mcp-server/sr
 ###
 
 ```
-gradle :mcp-server:runMcpTestSse
+./gradlew :mcp-server:runMcpTestSse
 ```
 works
 
 ```
-gradle :mcp-server:runMcpTestStdio
+./gradlew :mcp-server:runMcpTestStdio
 ```
 currently errors - TBD
 

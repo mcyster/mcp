@@ -5,13 +5,20 @@ Start server:
 ```
 cd $MCP_HOME
 
-gradle :char-server:bootRun
+./gradlew :chat-server:bootRun
 ```
 
 Prompt server:
 ```
-curl -X POST http://localhost:9000/chat -H "Content-Type: application/json" -d '{"userInput":"Hello, how are you?"}'
+curl -s -H "Content-Type: application/json" http://localhost:9000/chat -d '{"prompt":"Whats the weather in San Francisco"}' | jq -r .response
+
 ```
+
+Tools avaliable to chat
+```
+curl -s  -H "Content-Type: application/json" http://localhost:9000/chat/tools | jq .
+```
+
 
 ## Plan 
 
