@@ -15,4 +15,8 @@ public class ChatServer {
         SpringApplication.run(ChatServer.class, args);
     }
 
+    @Bean
+    public ToolCallbackProvider toolCallbackProvider(WeatherService weatherService) {
+        return MethodToolCallbackProvider.builder().toolObjects(weatherService).build();
+    }
 }

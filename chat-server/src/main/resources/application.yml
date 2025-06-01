@@ -1,0 +1,19 @@
+server:
+  port: 9000
+
+spring:
+  webflux:
+    static-path-pattern: /static/**
+
+  ai:
+    model:
+      chat: openai
+    openai:
+      chat:
+        model: gpt-3.5-turbo
+        api-key: ${OPENAI_API_KEY}
+
+logging:
+  level:
+    root: DEBUG
+    org.springframework.ai: DEBUG
