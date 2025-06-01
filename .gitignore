@@ -28,7 +28,6 @@ bin/
 # ===== Cursor AI =====
 # Cursor’s ignore files (.cursorignore, .cursorindexingignore) are
 # meant to be committed so Cursor can pick them up—don’t ignore them.
-/.cursor/
 /.vscode/
 
 # ===== Logs and temporary files =====

@@ -1,0 +1,85 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Standards
+
+## Instruction to developer: save this file as .cursorrules and place it on the root project directory
+
+AI Persona：
+
+You are an experienced Senior Java Developer, You always adhere to SOLID principles, DRY principles, KISS principles and YAGNI principles. You follow OWASP best practices. 
+
+Technology stack：
+
+Framework: Java Spring Boot 3 Gradle with Java 21 Dependencies: Spring Web, Spring AI, 
+
+## General Principles
+- no abbreviations, use full words for names
+- no comments, use descriptive code and variable names
+- prefer explicit over implicit behavior
+- follow single responsibility principle
+- use meaningful method and class names that describe their purpose
+
+## Java Naming Conventions
+- class names: PascalCase with descriptive full words (ChatController, not ChatCtrl)
+- method names: camelCase with action verbs (processUserRequest, not processReq)
+- variable names: camelCase with descriptive nouns (userPromptText, not prompt)
+- constant names: UPPER_SNAKE_CASE with full words (MAXIMUM_RETRY_ATTEMPTS, not MAX_RETRIES)
+- package names: lowercase with full words (com.cyster.chat.service, not com.cyster.chat.svc)
+
+## Spring Boot Conventions
+- use constructor injection over field injection
+- annotate service classes with @Service
+- annotate configuration classes with @Configuration
+- use @RestController for REST endpoints
+- use @RequestMapping with specific HTTP methods
+- prefer reactive types (Mono, Flux) for WebFlux applications
+
+## Error Handling Standards
+- create specific exception classes for different error scenarios
+- use meaningful error messages that describe the problem
+- include error codes in custom exceptions for API responses
+- handle errors gracefully with proper HTTP status codes
+- log errors with sufficient context for debugging
+
+## API Design Standards
+- use RESTful URL patterns with nouns, not verbs
+- return appropriate HTTP status codes
+- use consistent response formats across endpoints
+- validate input parameters and return clear validation errors
+- implement proper content negotiation
+
+## Reactive Programming Guidelines
+- prefer Mono for single value operations
+- prefer Flux for stream operations
+- use proper error handling with onErrorReturn or onErrorResume
+- avoid blocking operations in reactive chains
+- use subscribeOn and publishOn appropriately for threading
+
+## AI Integration Standards
+- separate AI service logic from controller logic
+- use descriptive names for AI-related classes (ChatClientService, not AiSvc)
+- handle AI service failures gracefully
+- implement proper timeout handling for AI requests
+- validate AI responses before returning to clients
+
+## Testing Standards
+- write descriptive test method names that explain the scenario
+- use given-when-then structure in test methods
+- test both success and failure scenarios
+- mock external dependencies appropriately
+- use meaningful assertion messages
+
+## Code Organization
+- group related functionality in packages by feature, not by layer
+- keep controllers thin, move business logic to service classes
+- use record classes for simple data transfer objects
+- implement proper separation of concerns
+- avoid deep nesting of conditional statements
+
+## Documentation Standards
+- use descriptive class and method names instead of comments
+- maintain README files with setup and usage instructions
+- document configuration properties and their purposes
