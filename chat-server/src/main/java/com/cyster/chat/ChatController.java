@@ -2,12 +2,14 @@ package com.cyster.chat;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.tool.ToolCallbackProvider;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.List;
 import java.util.Arrays;
@@ -25,10 +27,10 @@ public class ChatController {
     }
 
     @PostMapping
-    public Mono<ChatResponse> chat(@RequestBody ChatRequest request) {
+    @Operation(summary = "Send a chat message")
+    public Mono<ChatResult> chat(@RequestBody ChatRequest request) {
         if (request.prompt() == null || request.prompt().trim().isEmpty()) {
-            return Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, 
-            "No prompt was specified"));
+            return Mono.error(new ChatException(ChatErrorCode.PROMPT_MISSING, "No prompt was specified"));
         }
 
         return chatClient.prompt()
@@ -37,45 +39,54 @@ public class ChatController {
             .stream()
             .content()
             .collectList()
-            .map(list -> new ChatResponse(String.join("", list)));
+            .map(list -> (ChatResult) new ChatResponse(String.join("", list)))
+            .onErrorMap(throwable -> new ChatException(ChatErrorCode.TOOL_FAILURE, "Chat processing failed: " + throwable.getMessage()));
     }
 
     @GetMapping("/tools")
+    @Operation(summary = "List available tools")
     public List<String> tools() {
         return Arrays.stream(toolCallbackProvider.getToolCallbacks())
             .map(toolCallback -> toolCallback.getToolDefinition().name())
             .toList();
     }
 
-    public record ChatRequest(String prompt) {};
-    public record ChatResponse(String response) {};
-    public static record ChatErrorResponse(ChatErrorCode code, String message) {}
+    @Schema(description = "Chat request containing user prompt")
+    public record ChatRequest(
+        @Schema(description = "User message or question", example = "What is the weather like today?")
+        String prompt
+    ) {};
+
+    @Schema(oneOf = {ChatResponse.class, ChatErrorResponse.class})
+    public sealed interface ChatResult permits ChatResponse, ChatErrorResponse {}
+
+    @Schema(description = "Chat response containing AI-generated content")
+    public record ChatResponse(
+        @Schema(description = "AI-generated response text")
+        String response
+    ) implements ChatResult {};
+
+    @Schema(description = "Chat error response for validation and processing errors")
+    public static record ChatErrorResponse(
+        @Schema(description = "Specific error code indicating the type of error")
+        ChatErrorCode code,
+        @Schema(description = "Human-readable error message")
+        String message
+    ) implements ChatResult {}
+
     public static enum ChatErrorCode {
+        @Schema(description = "Prompt was empty or missing")
         PROMPT_MISSING,
+
+        @Schema(description = "Tool call failed")
         TOOL_FAILURE
     }
 
-    public static class ChatException extends RuntimeException {
-        private final ChatErrorCode code;
-        private final HttpStatus status;
-
+    public class ChatException extends RestException {
         public ChatException(ChatErrorCode code, String message) {
-            this(code, message, HttpStatus.BAD_REQUEST);
-        }
-
-        public ChatException(ChatErrorCode code, String message, HttpStatus status) {
-            super(message);
-            this.code = code;
-            this.status = status;
-        }
-
-        public ChatErrorCode getCode() {
-            return code;
-        }
-
-        public HttpStatus getStatus() {
-            return status;
+            super(code, message, HttpStatus.BAD_REQUEST);
         }
     }
+   
 }
 
