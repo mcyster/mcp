@@ -22,5 +22,9 @@ subprojects {
             mavenBom "io.modelcontextprotocol.sdk:mcp-bom:0.10.0"
         }
     }
+
+    tasks.withType(Test).configureEach {
+        jvmArgs '-Xshare:off'
+    }
 }
 
