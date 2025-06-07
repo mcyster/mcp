@@ -5,7 +5,13 @@ plugins {
 }
 
 dependencies {
-   implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux"
+    implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux"
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 tasks.register("runMcpTestSse", JavaExec) {
@@ -33,3 +39,8 @@ tasks.register("runMcpTestStdio", JavaExec) {
 
     mainClass.set("com.cyster.mcp.McpTestStdio")
 }
+
+tasks.named("test") {
+    useJUnitPlatform()
+}
+

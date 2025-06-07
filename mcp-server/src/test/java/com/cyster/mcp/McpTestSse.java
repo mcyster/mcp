@@ -38,7 +38,19 @@ public class McpTestSse {
 
         WebFluxSseClientTransport transport = new WebFluxSseClientTransport(webClientBuilder);
 
-        new McpTestClient(transport).run();
+        var client = io.modelcontextprotocol.client.McpClient.sync(transport).build();
+        client.initialize();
+        client.ping();
+        var tools = client.listTools();
+        System.out.println("Available Tools = " + tools);
+        var weather = client.callTool(new io.modelcontextprotocol.spec.McpSchema.CallToolRequest(
+                "getWeatherForecastByLocation",
+                java.util.Map.of("latitude", "47.6062", "longitude", "-122.3321")));
+        System.out.println("Weather Forecast: " + weather);
+        var alert = client.callTool(new io.modelcontextprotocol.spec.McpSchema.CallToolRequest(
+                "getAlerts", java.util.Map.of("state", "NY")));
+        System.out.println("Alert Response = " + alert);
+        client.close();
     }
 
 }

@@ -1,18 +1,16 @@
-package com.cyster.flux.chat;
+package com.cyster.mvp.chat;
 
 import org.springframework.http.HttpStatus;
 import java.util.Map;
 import java.util.UUID;
 
 public class RestException extends RuntimeException {
-    private final String uniqueId;
     private final Enum<?> errorCode;
     private final HttpStatus status;
     private final Map<String, Object> parameters;
 
     public RestException(Enum<?> errorCode, String message, HttpStatus status, Map<String, Object> parameters) {
         super(message);
-        this.uniqueId = UUID.randomUUID().toString();
         this.errorCode = errorCode;
         this.status = status;
         this.parameters = parameters;
@@ -20,7 +18,6 @@ public class RestException extends RuntimeException {
 
     public RestException(Enum<?> errorCode, String message, HttpStatus status) {
         super(message);
-        this.uniqueId = UUID.randomUUID().toString();
         this.errorCode = errorCode;
         this.status = status;
         this.parameters = Map.of();
@@ -31,7 +28,7 @@ public class RestException extends RuntimeException {
     }
 
     public String getUniqueId() {
-        return uniqueId;
+        return UUID.randomUUID().toString();
     }
 
     public Enum<?> getErrorCode() {
