@@ -6,7 +6,7 @@ pkgs.mkShell {
     pkgs.less
     pkgs.vim
     pkgs.jq.bin
-    #pkgs.gradle
+    pkgs.gradle
     pkgs.gradle-completion
     pkgs.jdk21
     pkgs.oauth2l
