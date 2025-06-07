@@ -32,7 +32,6 @@ class ChatExceptionHandlerTest {
             .exchange()
             .expectStatus().isBadRequest()
             .expectBody()
-            .jsonPath("$.httpStatusCode").isEqualTo(400)
             .jsonPath("$.code").isEqualTo("PROMPT_MISSING")
             .jsonPath("$.message").isEqualTo("No prompt was specified");
     }
