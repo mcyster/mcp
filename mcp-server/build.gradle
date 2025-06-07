@@ -8,6 +8,10 @@ dependencies {
    implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux"
 }
 
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
 tasks.register("runMcpTestSse", JavaExec) {
     group = "application"
     description = "Launch the SSE test client from test sources"
