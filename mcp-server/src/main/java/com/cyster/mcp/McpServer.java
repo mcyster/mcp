@@ -13,7 +13,7 @@ public class McpServer {
     }
 
     @Bean
-    public ToolCallbackProvider environentTools(WeatherService weatherService, ToolContextService environmentService) {
+    public ToolCallbackProvider environmentTools(WeatherService weatherService, ToolContextService environmentService) {
         return MethodToolCallbackProvider.builder().toolObjects(weatherService, environmentService).build();
     }
         
