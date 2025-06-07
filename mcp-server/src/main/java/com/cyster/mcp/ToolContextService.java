@@ -25,15 +25,15 @@ public class ToolContextService {
 
         logger.info("ToolContext.exchange.clientInfo: {}", exchange.getClientInfo());
 
-        // Meed to get session from Mcp(A)SyncServerExchange
+        // Need to get session from Mcp(A)SyncServerExchange
         // looks like this will be in the next release of the MCP java-sdk 0.11.0
         // https://github.com/modelcontextprotocol/java-sdk
         // https://chatgpt.com/share/6834c998-1d3c-8008-81c9-70010740fd4e
         // McpServerSession session = exchange.getSession();
         // session.env();
 
-        // for now will pult api key from environment as work around
-        // wont work for non local server
+        // for now will pull API key from environment as work around
+        // won't work for non local server
         String home = System.getenv("HOME");
         return "{ \"HOME\": \"" + home + "\" }";
     }
