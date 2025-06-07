@@ -3,13 +3,9 @@ let
 in
 pkgs.mkShell {
   buildInputs = [
-    pkgs.less
-    pkgs.vim
-    pkgs.jq.bin
-    #pkgs.gradle
-    pkgs.gradle-completion
+    pkgs.gradle
     pkgs.jdk21
-    pkgs.oauth2l
+    #pkgs.oauth2l
   ];
 
   LANG = "en_US.UTF-8";
