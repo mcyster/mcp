@@ -10,7 +10,7 @@ Working against Spring AI v1.0.0
 Repo
 - [mcp-server](./mcp-server)
   - MCP server built using Spring AI
-- [chat-server](./chat-server)
+- [chat-flux-server](./chat-flux-server)
   - Chat server built using Spring AI
 - [mcp-tool](./mcp-tool)
   - Tool to make MCP tool requests, to help understand the protocol

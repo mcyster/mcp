@@ -5,7 +5,7 @@ Start server:
 ```
 cd $MCP_HOME
 
-./gradlew :chat-flux-server:bootRun
+gradle :chat-flux-server:bootRun
 ```
 
 Prompt server:
