@@ -1,3 +1,4 @@
+
 # Spring MCP Server
 
 Working against Spring AI v1.0.0
@@ -16,21 +17,21 @@ Repo
 
 ## Setup
 
-Install Nix and update channels (only needed once per environment):
+1. Install Nix and update channels (only needed once per environment):
 
-```bash
-apt-get update && apt-get install -y nix-bin
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-nix-channel --update
-```
+   ```bash
+   apt-get update && apt-get install -y nix-bin
+   nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+   nix-channel --update
+   ```
 
-Enter the development environment with:
+2. Enter the development environment:
 
-```bash
-nix-shell shell.nix
-```
+   ```bash
+   nix-shell shell.nix
+   ```
 
-All `gradle` commands must be run inside this shell.
+   All `gradle` commands must be run inside this shell.
 
 ### Common Gradle commands
 
