@@ -1,5 +1,5 @@
 
-# Spring MCP Server 
+# Spring MCP Server
 
 Working against Spring AI v1.0.0
 
@@ -12,9 +12,37 @@ Repo
   - MCP server built using Spring AI
 - [chat-flux-server](./chat-flux-server)
   - Chat server built using Spring AI
-  - [mcp-tool](./mcp-tool)
-    - Tool to make MCP tool requests, to help understand the protocol
+- [mcp-tool](./mcp-tool)
+  - Tool to make MCP tool requests, to help understand the protocol
+
+## Setup
+
+1. If not already on a nix environment, install Nix and update channels (only needed once per environment):
+
+```bash
+apt-get update && apt-get install -y nix-bin 
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+nix-channel --update
+```
+
+2. Enter the development environment:
+
+```bash
+nix-shell shell.nix
+```
+
+All `gradle` commands must be run inside this shell.
+
+### Common Gradle commands
+
+```bash
+gradle test
+gradle :mcp-app:bootJar
+gradle :mcp-server:runMcpTestSse
+gradle :mcp-server:runMcpTestStdio
+```
 
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
+
