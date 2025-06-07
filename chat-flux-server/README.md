@@ -24,8 +24,3 @@ When the server is running check the api:
 - [ApI Docs](http://localhost:9000/v3/api-docs)
 
 
-## Plan 
-
-- make MCP Client
-- expose Chat as MCP Tool
-
