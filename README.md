@@ -12,5 +12,9 @@ Repo
   - MCP server built using Spring AI
 - [chat-flux-server](./chat-flux-server)
   - Chat server built using Spring AI
-- [mcp-tool](./mcp-tool)
-  - Tool to make MCP tool requests, to help understand the protocol
+  - [mcp-tool](./mcp-tool)
+    - Tool to make MCP tool requests, to help understand the protocol
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
