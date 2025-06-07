@@ -11,10 +11,11 @@ import java.util.Map;
 public class RestExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(RestExceptionHandler.class);
 
+
     @ExceptionHandler(RestException.class)
     public ResponseEntity<RestErrorResponse> handle(RestException exception) {
         log.error("RestException: {} {} {} {}", exception.getUniqueId(), exception.getErrorCode(), exception.getMessage(), exception.getParameters());
-        
+
         return ResponseEntity
             .status(exception.getHttpStatusCode())
             .body(new RestErrorResponse(exception.getHttpStatusCode().value(), exception.getUniqueId(), exception.getErrorCode(), exception.getMessage(), exception.getParameters()));
