@@ -19,6 +19,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "mcp"
 include "mcp-server"
-include "chat-server"
+include "chat-flux-server"
 include "mcp-tool"
 
