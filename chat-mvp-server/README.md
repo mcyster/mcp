@@ -1,11 +1,10 @@
-
-# Spring AI Chat Server
+# Spring MVC Chat Server
 
 Start server:
-```
+```bash
 cd $MCP_HOME
 
-gradle :chat-flux-server:bootRun
+gradle :chat-mvp-server:bootRun
 ```
 
 Prompt server:

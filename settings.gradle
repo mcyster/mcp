@@ -21,4 +21,5 @@ rootProject.name = "mcp"
 include "mcp-server"
 include "chat-flux-server"
 include "mcp-tool"
+include "chat-mvp-server"
 
