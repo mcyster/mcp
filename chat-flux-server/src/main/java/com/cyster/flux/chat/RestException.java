@@ -1,4 +1,4 @@
-package com.cyster.chat;
+package com.cyster.flux.chat;
 
 import org.springframework.http.HttpStatus;
 import java.util.Map;
@@ -42,5 +42,4 @@ public class RestException extends RuntimeException {
     public Map<String, Object> getParameters() {
         return parameters;
     }
-}
-
+} 

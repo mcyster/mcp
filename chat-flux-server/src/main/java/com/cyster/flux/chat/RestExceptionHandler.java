@@ -1,4 +1,4 @@
-package com.cyster.chat;
+package com.cyster.flux.chat;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,4 +31,4 @@ public class RestExceptionHandler {
     }
 
     public record RestErrorResponse(int httpStatusCode, String uniqueId, Enum<?> code, String message, Map<String, Object> parameters) {}
-}
+} 

@@ -1,4 +1,4 @@
-package com.cyster.chat;
+package com.cyster.flux.chat;
 
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
@@ -16,4 +16,4 @@ public class ChatServer {
     public ToolCallbackProvider toolCallbackProvider(WeatherService weatherService) {
         return MethodToolCallbackProvider.builder().toolObjects(weatherService).build();
     }
-}
+} 

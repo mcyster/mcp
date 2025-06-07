@@ -1,4 +1,4 @@
-package com.cyster.chat;
+package com.cyster.flux.chat;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -123,4 +123,4 @@ public class WeatherService {
         System.out.println(client.getAlerts("CA"));
     }
 
-}
+} 

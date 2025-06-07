@@ -1,4 +1,4 @@
-package com.cyster.chat;
+package com.cyster.flux.chat;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -88,5 +88,4 @@ public class ChatController {
         }
     }
    
-}
-
+} 

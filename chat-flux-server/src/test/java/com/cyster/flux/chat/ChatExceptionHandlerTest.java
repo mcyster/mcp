@@ -1,4 +1,4 @@
-package com.cyster.chat;
+package com.cyster.flux.chat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +36,4 @@ class ChatExceptionHandlerTest {
             .jsonPath("$.code").isEqualTo("PROMPT_MISSING")
             .jsonPath("$.message").isEqualTo("No prompt was specified");
     }
-}
+} 
