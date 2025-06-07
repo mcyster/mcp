@@ -11,17 +11,6 @@ import java.util.Map;
 public class RestExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(RestExceptionHandler.class);
 
-    @ExceptionHandler(ChatController.ChatException.class)
-    public ResponseEntity<ChatController.ChatErrorResponse> handleChatException(ChatController.ChatException exception) {
-        log.error("ChatException: {} {}", exception.getErrorCode(), exception.getMessage());
-
-        ChatController.ChatErrorCode errorCode = (ChatController.ChatErrorCode) exception.getErrorCode();
-        ChatController.ChatErrorResponse errorResponse = new ChatController.ChatErrorResponse(errorCode, exception.getMessage());
-
-        return ResponseEntity
-            .status(exception.getHttpStatusCode())
-            .body(errorResponse);
-    }
 
     @ExceptionHandler(RestException.class)
     public ResponseEntity<RestErrorResponse> handle(RestException exception) {
