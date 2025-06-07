@@ -15,6 +15,7 @@ dependencies {
     implementation 'io.modelcontextprotocol.sdk:mcp-spring-webflux'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.18.0'
 }
 
 tasks.named('test') {
