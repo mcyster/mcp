@@ -13,7 +13,7 @@ nix-channel --update
 Use `nix-shell shell.nix` to enter the development environment. **All** `gradle` commands must run inside this shell.
 
 ## Ubuntu 
-Ubuntu can be used as a development envioment
+Ubuntu can be used as a development envionment
 
 ```bash
 sudo apt-get update
@@ -35,8 +35,7 @@ Common commands run inside the shell:
 
 - `gradle test`
 - `gradle :mcp-app:bootJar`
-- `gradle :mcp-server:runMcpTestSse`
-- `gradle :mcp-server:runMcpTestStdio`
+- `gradle :chat-mvp-app:bootJar`
+- `gradle :chat-flux-app:bootJar`
 
-These are the test commands used locally and should be executed within the Nix environment.
 
