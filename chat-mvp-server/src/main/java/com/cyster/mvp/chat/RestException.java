@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import java.util.Map;
 import java.util.UUID;
 
-public class RestException extends RuntimeException {
+public class RestException extends Exception {
     private final Enum<?> errorCode;
     private final HttpStatus status;
     private final Map<String, Object> parameters;

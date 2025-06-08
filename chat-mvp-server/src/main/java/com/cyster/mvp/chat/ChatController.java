@@ -27,7 +27,7 @@ public class ChatController {
 
     @PostMapping
     @Operation(summary = "Send a chat message")
-    public ChatResult chat(@RequestBody ChatRequest request) {
+    public ChatResponse chat(@RequestBody ChatRequest request) throws ChatException {
         if (request.prompt() == null || request.prompt().trim().isEmpty()) {
             throw new ChatException(ChatErrorCode.PROMPT_MISSING, "No prompt was specified");
         }
@@ -39,8 +39,8 @@ public class ChatController {
                     .call()
                     .content();
             return new ChatResponse(response);
-        } catch (Exception ex) {
-            throw new ChatException(ChatErrorCode.TOOL_FAILURE, "Chat processing failed: " + ex.getMessage());
+        } catch (Exception exception) {
+            throw new ChatException(ChatErrorCode.TOOL_FAILURE, "Chat processing failed: " + exception.getMessage());
         }
     }
 
@@ -58,22 +58,11 @@ public class ChatController {
             String prompt
     ) {}
 
-    @Schema(oneOf = {ChatResponse.class, ChatErrorResponse.class})
-    public sealed interface ChatResult permits ChatResponse, ChatErrorResponse {}
-
     @Schema(description = "Chat response containing AI-generated content")
     public record ChatResponse(
             @Schema(description = "AI-generated response text")
             String response
-    ) implements ChatResult {}
-
-    @Schema(description = "Chat error response for validation and processing errors")
-    public static record ChatErrorResponse(
-            @Schema(description = "Specific error code indicating the type of error")
-            ChatErrorCode code,
-            @Schema(description = "Human-readable error message")
-            String message
-    ) implements ChatResult {}
+    ) {}
 
     public static enum ChatErrorCode {
         @Schema(description = "Prompt was empty or missing")
