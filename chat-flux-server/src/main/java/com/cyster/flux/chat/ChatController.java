@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.List;
 import java.util.Arrays;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/chat")
@@ -68,11 +69,17 @@ public class ChatController {
 
     @Schema(description = "Chat error response for validation and processing errors")
     public static record ChatErrorResponse(
+        @Schema(description = "HTTP status code of the error")
+        int httpStatusCode,
+        @Schema(description = "Unique identifier for tracking the error")
+        String uniqueId,
         @Schema(description = "Specific error code indicating the type of error")
-        ChatErrorCode code,
+        ChatErrorCode errorCode,
         @Schema(description = "Human-readable error message")
-        String message
-    ) implements ChatResult {}
+        String message,
+        @Schema(description = "Additional information about the error")
+        Map<String, Object> parameters
+    ) implements ChatResult, ErrorResponse {}
 
     public static enum ChatErrorCode {
         @Schema(description = "Prompt was empty or missing")

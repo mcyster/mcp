@@ -12,11 +12,11 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(RestException.class)
     public ResponseEntity<RestErrorResponse> handle(RestException exception) {
-        log.error("RestException: {} {} {} {}", exception.getUniqueId(), exception.getErrorCode(), exception.getMessage(), exception.getParameters());
+        log.error("RestException: {} {} {} {}", exception.uniqueId(), exception.errorCode(), exception.getMessage(), exception.parameters());
         
         return ResponseEntity
-            .status(exception.getHttpStatusCode())
-            .body(new RestErrorResponse(exception.getHttpStatusCode(), exception.getUniqueId(), exception.getErrorCode(), exception.getMessage(), exception.getParameters()));
+            .status(exception.httpStatusCode())
+            .body(new RestErrorResponse(exception.httpStatusCode(), exception.uniqueId(), exception.errorCode(), exception.getMessage(), exception.parameters()));
     }
 
     @ExceptionHandler(Exception.class)
@@ -25,14 +25,14 @@ public class RestExceptionHandler {
         RestException wrapped = new RestException(null, "Internal server error", org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR);
 
         RestErrorResponse body = new RestErrorResponse(
-            wrapped.getHttpStatusCode(),
-            wrapped.getUniqueId(),
-            wrapped.getErrorCode(),
+            wrapped.httpStatusCode(),
+            wrapped.uniqueId(),
+            wrapped.errorCode(),
             wrapped.getMessage(),
-            wrapped.getParameters());
+            wrapped.parameters());
 
         return ResponseEntity
-            .status(wrapped.getHttpStatusCode())
+            .status(wrapped.httpStatusCode())
             .body(body);
     }
 

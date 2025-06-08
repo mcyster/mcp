@@ -31,23 +31,28 @@ public class RestException extends RuntimeException implements ErrorResponse {
     }
 
     @Override
-    public String getUniqueId() {
+    public String uniqueId() {
         return uniqueId;
     }
 
     @Override
-    public Enum<?> getErrorCode() {
+    public Enum<?> errorCode() {
         return errorCode;
     }
 
     @Override
-    public int getHttpStatusCode() {
+    public int httpStatusCode() {
         return status.value();
     }
 
     @Override
-    public Map<String, Object> getParameters() {
+    public Map<String, Object> parameters() {
         return parameters;
+    }
+
+    @Override
+    public String message() {
+        return getMessage();
     }
 
     public RestExceptionResponse toRestExceptionResponse() {
