@@ -1,0 +1,14 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+dependencies {
+    implementation project(':weather')
+    implementation 'org.springframework.ai:spring-ai-autoconfigure-model-tool'
+}

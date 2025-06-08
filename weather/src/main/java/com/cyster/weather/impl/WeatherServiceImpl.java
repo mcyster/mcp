@@ -65,7 +65,6 @@ public class WeatherServiceImpl implements WeatherService {
   }
 
   @Override
-  @Tool(description = "Get weather forecast for a specific latitude/longitude")
   public String getWeatherForecastByLocation(double latitude, double longitude) {
     var points =
         restClient
@@ -108,9 +107,6 @@ public class WeatherServiceImpl implements WeatherService {
   }
 
   @Override
-  @Tool(
-      description =
-          "Get weather alerts for a US state. Input is Two-letter US state code (e.g. CA, NY)")
   public String getAlerts(String state) {
     Alert alert =
         restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
