@@ -42,6 +42,21 @@ gradle :mcp-server:runMcpTestSse
 gradle :mcp-server:runMcpTestStdio
 ```
 
+## Configuration
+
+The `mcp-server` module reads a `tool-context.home` property to populate
+environment information returned from `ToolContextService`. The default
+`application.yml` maps this property to the `TOOL_CONTEXT_HOME` environment
+variable falling back to `HOME`:
+
+```yaml
+tool-context:
+  home: ${TOOL_CONTEXT_HOME:${HOME}}
+```
+
+You can override this value using Spring configuration or by exporting the
+`TOOL_CONTEXT_HOME` variable when running the server.
+
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).

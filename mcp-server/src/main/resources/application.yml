@@ -3,3 +3,6 @@
 logging:
   level:
     root: DEBUG
+
+tool-context:
+  home: ${TOOL_CONTEXT_HOME:${HOME}}
