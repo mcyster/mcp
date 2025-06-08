@@ -2,9 +2,11 @@ package com.cyster.flux.chat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
@@ -27,6 +29,19 @@ public class RestExceptionHandler {
                 exception.errorCode(),
                 exception.getMessage(),
                 exception.parameters()));
+  }
+
+  @ExceptionHandler(ResponseStatusException.class)
+  public ResponseEntity<RestErrorResponse> handleResponseStatus(ResponseStatusException exception) {
+    if (exception.getStatusCode() == HttpStatus.NOT_FOUND) {
+      return handle(
+          new RestException(
+              GlobalErrorCode.NOT_FOUND, "Endpoint not defined", HttpStatus.NOT_FOUND));
+    }
+
+    return handle(
+        new RestException(
+            null, exception.getReason(), HttpStatus.valueOf(exception.getStatusCode().value())));
   }
 
   @ExceptionHandler(Exception.class)
