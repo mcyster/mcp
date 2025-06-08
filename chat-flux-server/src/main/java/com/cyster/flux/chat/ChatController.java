@@ -87,7 +87,7 @@ public class ChatController {
       @Schema(description = "Human-readable error message") String message,
       @Schema(description = "Additional information about the error")
           Map<String, Object> parameters)
-      implements ChatResult, ErrorResponse {}
+      implements ChatResult, ErrorResponse<ChatErrorCode> {}
 
   public static enum ChatErrorCode {
     @Schema(description = "Prompt was empty or missing")

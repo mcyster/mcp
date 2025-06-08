@@ -4,13 +4,13 @@ import java.util.Map;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
 
-public class RestException extends RuntimeException implements ErrorResponse {
+public class RestException extends RuntimeException implements ErrorResponse<Enum<?>> {
   private final String uniqueId;
   private final Enum<?> errorCode;
   private final HttpStatus status;
   private final Map<String, Object> parameters;
 
-  public RestException(ErrorResponse errorResponse) {
+  public RestException(ErrorResponse<?> errorResponse) {
     super(errorResponse.message());
     this.uniqueId = errorResponse.uniqueId();
     this.errorCode = errorResponse.errorCode();
