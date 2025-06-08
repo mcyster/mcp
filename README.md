@@ -40,6 +40,7 @@ gradle test
 gradle :mcp-app:bootJar
 gradle :mcp-server:runMcpTestSse
 gradle :mcp-server:runMcpTestStdio
+gradle spotlessApply   # formats source code using google-java-format
 ```
 
 ## Configuration
