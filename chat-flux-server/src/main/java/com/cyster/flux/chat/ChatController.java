@@ -78,16 +78,16 @@ public class ChatController {
       implements ChatResult {}
   ;
 
-  @Schema(description = "Chat error response for validation and processing errors")
+  @Schema(
+      description = "Chat error response for validation and processing errors",
+      allOf = {ErrorResponse.class})
   public static record ChatErrorResponse(
-      @Schema(description = "HTTP status code of the error") int httpStatusCode,
-      @Schema(description = "Unique identifier for tracking the error") String uniqueId,
-      @Schema(description = "Specific error code indicating the type of error")
-          ChatErrorCode errorCode,
-      @Schema(description = "Human-readable error message") String message,
-      @Schema(description = "Additional information about the error")
-          Map<String, Object> parameters)
-      implements ChatResult, ErrorResponse {}
+      int httpStatusCode,
+      String uniqueId,
+      ChatErrorCode errorCode,
+      String message,
+      Map<String, Object> parameters)
+      implements ChatResult, ErrorResponse<ChatErrorCode> {}
 
   public static enum ChatErrorCode {
     @Schema(description = "Prompt was empty or missing")
