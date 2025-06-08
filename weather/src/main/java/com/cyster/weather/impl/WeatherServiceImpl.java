@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.cyster.weather.service.WeatherService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -69,6 +70,7 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     @Override
+    @Tool(description = "Get weather forecast for a specific latitude/longitude")
     public String getWeatherForecastByLocation(double latitude, double longitude) {
         var points = restClient.get()
             .uri("/points/{latitude},{longitude}", latitude, longitude)
@@ -104,6 +106,7 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     @Override
+    @Tool(description = "Get weather alerts for a US state. Input is Two-letter US state code (e.g. CA, NY)")
     public String getAlerts(String state) {
         Alert alert = restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
 

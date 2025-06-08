@@ -6,7 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+import com.cyster.weather.WeatherServicePackageMarker;
+import com.cyster.weather.service.WeatherService;
+
+@SpringBootApplication(scanBasePackageClasses = {ChatServer.class, WeatherServicePackageMarker.class})
 public class ChatServer {
     public static void main(String[] args) {
         SpringApplication.run(ChatServer.class, args);
@@ -16,4 +19,4 @@ public class ChatServer {
     public ToolCallbackProvider toolCallbackProvider(WeatherService weatherService) {
         return MethodToolCallbackProvider.builder().toolObjects(weatherService).build();
     }
-} 
+}
