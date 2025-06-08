@@ -1,12 +1,12 @@
 package com.cyster.flux.chat;
 
+import com.cyster.rest.ErrorResponse;
+import com.cyster.rest.RestException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import com.cyster.rest.ErrorResponse;
-import com.cyster.rest.RestException;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallbackProvider;

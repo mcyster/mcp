@@ -1,5 +1,6 @@
 package com.cyster.flux.chat;
 
+import com.cyster.rest.RestExceptionHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallbackProvider;
@@ -9,7 +10,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import com.cyster.rest.RestExceptionHandler;
 
 @WebFluxTest(ChatController.class)
 @Import(RestExceptionHandler.class)
