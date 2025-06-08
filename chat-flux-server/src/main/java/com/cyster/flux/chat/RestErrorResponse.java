@@ -19,4 +19,30 @@ public record RestErrorResponse(
     String message,
     @Schema(description = "Additional information about the error")
     Map<String, Object> parameters
-) implements ErrorResponse {}
+) implements ErrorResponse {
+
+    @Override
+    public int getHttpStatusCode() {
+        return httpStatusCode;
+    }
+
+    @Override
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    @Override
+    public Enum<?> getErrorCode() {
+        return code;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    @Override
+    public Map<String, Object> getParameters() {
+        return parameters;
+    }
+}
