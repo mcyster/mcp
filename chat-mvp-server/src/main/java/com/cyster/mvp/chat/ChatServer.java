@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.cyster.weather.service.WeatherService;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.cyster.mvp.chat", "com.cyster.weather.impl"})
 public class ChatServer {
     public static void main(String[] args) {
         SpringApplication.run(ChatServer.class, args);

@@ -1,9 +1,0 @@
-plugins {
-    id 'java-library'
-}
-
-dependencies {
-    implementation project(':weather:weather-service')
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.ai:spring-ai-core'
-}

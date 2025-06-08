@@ -23,5 +23,5 @@ include "chat-flux-server"
 include "mcp-tool"
 include "chat-mvp-server"
 include ":weather:weather-service"
-include ":weather:weather-implementation"
+include ":weather:weather-impl"
 
