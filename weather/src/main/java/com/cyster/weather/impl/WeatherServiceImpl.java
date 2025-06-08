@@ -1,9 +1,10 @@
 package com.cyster.weather.impl;
 
+import com.cyster.weather.model.AlertResponse;
+import com.cyster.weather.model.ForecastResponse;
 import com.cyster.weather.service.WeatherService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -64,7 +65,7 @@ public class WeatherServiceImpl implements WeatherService {
   }
 
   @Override
-  public String getWeatherForecastByLocation(double latitude, double longitude) {
+  public ForecastResponse getWeatherForecastByLocation(double latitude, double longitude) {
     var points =
         restClient
             .get()
@@ -73,63 +74,53 @@ public class WeatherServiceImpl implements WeatherService {
             .body(Points.class);
 
     if (points == null || points.properties() == null) {
-      return "Could not retrieve forecast information for the given location.";
+      return new ForecastResponse(java.util.List.of());
     }
 
     var forecast =
         restClient.get().uri(points.properties().forecast()).retrieve().body(Forecast.class);
 
     if (forecast == null || forecast.properties() == null) {
-      return "Could not retrieve forecast information for the given location.";
+      return new ForecastResponse(java.util.List.of());
     }
 
-    String forecastText =
+    List<ForecastResponse.ForecastPeriod> periods =
         forecast.properties().periods().stream()
             .map(
-                period ->
-                    String.format(
-                        """
-                    %s:
-                    Temperature: %s %s
-                    Wind: %s %s
-                    Forecast: %s
-                    """,
-                        period.name(),
-                        period.temperature(),
-                        period.temperatureUnit(),
-                        period.windSpeed(),
-                        period.windDirection(),
-                        period.detailedForecast()))
-            .collect(Collectors.joining());
+                p ->
+                    new ForecastResponse.ForecastPeriod(
+                        p.name(),
+                        p.temperature(),
+                        p.temperatureUnit(),
+                        p.windSpeed(),
+                        p.windDirection(),
+                        p.detailedForecast()))
+            .toList();
 
-    return forecastText;
+    return new ForecastResponse(periods);
   }
 
   @Override
-  public String getAlerts(String state) {
+  public AlertResponse getAlerts(String state) {
     Alert alert =
         restClient.get().uri("/alerts/active/area/{state}", state).retrieve().body(Alert.class);
 
     if (alert == null || alert.features() == null) {
-      return "Could not retrieve alert information for the given state.";
+      return new AlertResponse(java.util.List.of());
     }
 
-    return alert.features().stream()
-        .map(
-            feature ->
-                String.format(
-                    """
-                    Event: %s
-                    Area: %s
-                    Severity: %s
-                    Description: %s
-                    Instructions: %s
-                    """,
-                    feature.properties().event(),
-                    feature.properties().areaDesc(),
-                    feature.properties().severity(),
-                    feature.properties().description(),
-                    feature.properties().instruction()))
-        .collect(Collectors.joining("\n"));
+    List<AlertResponse.Alert> alerts =
+        alert.features().stream()
+            .map(
+                feature ->
+                    new AlertResponse.Alert(
+                        feature.properties().event(),
+                        feature.properties().areaDesc(),
+                        feature.properties().severity(),
+                        feature.properties().description(),
+                        feature.properties().instruction()))
+            .toList();
+
+    return new AlertResponse(alerts);
   }
 }
