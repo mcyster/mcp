@@ -4,13 +4,13 @@ import org.springframework.http.HttpStatus;
 import java.util.Map;
 import java.util.UUID;
 
-public class RestException<CODE extends Enum<CODE>> extends RuntimeException implements ErrorResponse<CODE> {
+public class RestException<E extends Enum<?>> extends RuntimeException implements ErrorResponse<E> {
     private final String uniqueId;
-    private final CODE errorCode;
+    private final E errorCode;
     private final HttpStatus status;
     private final Map<String, Object> parameters;
 
-    public RestException(CODE errorCode, String message, HttpStatus status, Map<String, Object> parameters) {
+    public RestException(E errorCode, String message, HttpStatus status, Map<String, Object> parameters) {
         super(message);
         this.uniqueId = UUID.randomUUID().toString();
         this.errorCode = errorCode;
@@ -18,7 +18,7 @@ public class RestException<CODE extends Enum<CODE>> extends RuntimeException imp
         this.parameters = parameters;
     }
 
-    public RestException(CODE errorCode, String message, HttpStatus status) {
+    public RestException(E errorCode, String message, HttpStatus status) {
         super(message);
         this.uniqueId = UUID.randomUUID().toString();
         this.errorCode = errorCode;
@@ -26,7 +26,7 @@ public class RestException<CODE extends Enum<CODE>> extends RuntimeException imp
         this.parameters = Map.of();
     }
 
-    public RestException(CODE errorCode, String message) {
+    public RestException(E errorCode, String message) {
         this(errorCode, message, HttpStatus.BAD_REQUEST, Map.of());
     }
 
@@ -36,13 +36,13 @@ public class RestException<CODE extends Enum<CODE>> extends RuntimeException imp
     }
 
     @Override
-    public CODE getErrorCode() {
+    public E getErrorCode() {
         return errorCode;
     }
 
     @Override
-    public HttpStatus getHttpStatusCode() {
-        return status;
+    public int getHttpStatusCode() {
+        return status.value();
     }
 
     @Override
