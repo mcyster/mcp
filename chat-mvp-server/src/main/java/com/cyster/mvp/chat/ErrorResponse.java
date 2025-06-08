@@ -7,7 +7,7 @@ import java.util.Map;
  * Interface describing an error returned to the client.
  */
 @Schema(name = "ErrorResponse", description = "Details about an error response")
-public interface ErrorResponse<E extends Enum<?>> {
+public interface ErrorResponse {
 
     @Schema(description = "HTTP status code of the error", example = "400")
     int getHttpStatusCode();
@@ -16,7 +16,7 @@ public interface ErrorResponse<E extends Enum<?>> {
     String getUniqueId();
 
     @Schema(description = "Application specific error code", example = "PROMPT_MISSING")
-    E getErrorCode();
+    Enum<?> getErrorCode();
 
     @Schema(description = "Human readable error message", example = "No prompt was specified")
     String getMessage();

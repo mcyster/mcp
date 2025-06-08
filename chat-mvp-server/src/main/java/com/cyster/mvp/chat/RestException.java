@@ -4,26 +4,26 @@ import org.springframework.http.HttpStatus;
 import java.util.Map;
 import java.util.UUID;
 
-public class RestException<E extends Enum<?>> extends Exception implements ErrorResponse<E> {
-    private final E errorCode;
+public class RestException extends Exception implements ErrorResponse {
+    private final Enum<?> errorCode;
     private final HttpStatus status;
     private final Map<String, Object> parameters;
 
-    public RestException(E errorCode, String message, HttpStatus status, Map<String, Object> parameters) {
+    public RestException(Enum<?> errorCode, String message, HttpStatus status, Map<String, Object> parameters) {
         super(message);
         this.errorCode = errorCode;
         this.status = status;
         this.parameters = parameters;
     }
 
-    public RestException(E errorCode, String message, HttpStatus status) {
+    public RestException(Enum<?> errorCode, String message, HttpStatus status) {
         super(message);
         this.errorCode = errorCode;
         this.status = status;
         this.parameters = Map.of();
     }
 
-    public RestException(E errorCode, String message) {
+    public RestException(Enum<?> errorCode, String message) {
         this(errorCode, message, HttpStatus.BAD_REQUEST, Map.of());
     }
 
@@ -33,7 +33,7 @@ public class RestException<E extends Enum<?>> extends Exception implements Error
     }
 
     @Override
-    public E getErrorCode() {
+    public Enum<?> getErrorCode() {
         return errorCode;
     }
 
