@@ -13,6 +13,7 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-autoconfigure-model-openai'
     implementation 'io.modelcontextprotocol.sdk:mcp'
     implementation 'io.modelcontextprotocol.sdk:mcp-spring-webflux'
+    implementation project(':weather:weather-implementation')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.18.0'
