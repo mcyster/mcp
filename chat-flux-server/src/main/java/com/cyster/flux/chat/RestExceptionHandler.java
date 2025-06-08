@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.Map;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
@@ -30,5 +29,4 @@ public class RestExceptionHandler {
             .body(new RestErrorResponse(wrapped.getHttpStatusCode().value(), wrapped.getUniqueId(), wrapped.getErrorCode(), wrapped.getMessage(), wrapped.getParameters()));
     }
 
-    public record RestErrorResponse(int httpStatusCode, String uniqueId, Enum<?> code, String message, Map<String, Object> parameters) {}
 } 
