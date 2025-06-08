@@ -80,7 +80,7 @@ public class ChatController {
         TOOL_FAILURE
     }
 
-    public class ChatException extends RestException {
+    public class ChatException extends RestException<ChatErrorCode> {
         public ChatException(ChatErrorCode code, String message) {
             super(code, message, HttpStatus.BAD_REQUEST);
         }
