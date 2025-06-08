@@ -6,7 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+import com.cyster.weather.service.WeatherService;
+
+@SpringBootApplication(scanBasePackages = {"com.cyster.mcp", "com.cyster.weather"})
 public class McpServer {
     public static void main(String[] args) {
         SpringApplication.run(McpServer.class, args);

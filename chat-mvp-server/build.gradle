@@ -13,6 +13,7 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-autoconfigure-model-openai'
     implementation 'io.modelcontextprotocol.sdk:mcp'
     implementation 'io.modelcontextprotocol.sdk:mcp-spring-webmvc'
+    implementation project(':weather')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
