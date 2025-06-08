@@ -4,11 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.web.bind.annotation.*;
+import com.cyster.flux.chat.RestErrorResponse;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -29,12 +29,9 @@ public class ChatController {
     if (request.prompt() == null || request.prompt().trim().isEmpty()) {
       return Mono.error(
           new RestException(
-              new ChatErrorResponse(
-                  400,
-                  java.util.UUID.randomUUID().toString(),
-                  ChatErrorCode.PROMPT_MISSING,
-                  "No prompt was specified",
-                  java.util.Map.of())));
+              ChatErrorCode.PROMPT_MISSING,
+              "No prompt was specified",
+              org.springframework.http.HttpStatus.BAD_REQUEST));
     }
 
     return chatClient
@@ -48,12 +45,9 @@ public class ChatController {
         .onErrorMap(
             throwable ->
                 new RestException(
-                    new ChatErrorResponse(
-                        400,
-                        java.util.UUID.randomUUID().toString(),
-                        ChatErrorCode.TOOL_FAILURE,
-                        "Chat processing failed: " + throwable.getMessage(),
-                        java.util.Map.of())));
+                    ChatErrorCode.TOOL_FAILURE,
+                    "Chat processing failed: " + throwable.getMessage(),
+                    org.springframework.http.HttpStatus.BAD_REQUEST));
   }
 
   @GetMapping("/tools")
@@ -70,24 +64,14 @@ public class ChatController {
           String prompt) {}
   ;
 
-  @Schema(oneOf = {ChatResponse.class, ChatErrorResponse.class})
-  public sealed interface ChatResult permits ChatResponse, ChatErrorResponse {}
+  @Schema(oneOf = {ChatResponse.class, RestErrorResponse.class})
+  public sealed interface ChatResult permits ChatResponse, RestErrorResponse {}
 
   @Schema(description = "Chat response containing AI-generated content")
   public record ChatResponse(@Schema(description = "AI-generated response text") String response)
       implements ChatResult {}
   ;
 
-  @Schema(description = "Chat error response for validation and processing errors")
-  public static record ChatErrorResponse(
-      @Schema(description = "HTTP status code of the error") int httpStatusCode,
-      @Schema(description = "Unique identifier for tracking the error") String uniqueId,
-      @Schema(description = "Specific error code indicating the type of error")
-          ChatErrorCode errorCode,
-      @Schema(description = "Human-readable error message") String message,
-      @Schema(description = "Additional information about the error")
-          Map<String, Object> parameters)
-      implements ChatResult, ErrorResponse {}
 
   public static enum ChatErrorCode {
     @Schema(description = "Prompt was empty or missing")

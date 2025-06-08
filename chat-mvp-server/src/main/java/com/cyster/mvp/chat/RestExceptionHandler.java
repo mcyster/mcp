@@ -11,7 +11,7 @@ public class RestExceptionHandler {
   private static final Logger log = LoggerFactory.getLogger(RestExceptionHandler.class);
 
   @ExceptionHandler(RestException.class)
-  public ResponseEntity<RestErrorResponse> handle(RestException exception) {
+  public ResponseEntity<RestErrorResponse<?>> handle(RestException exception) {
     log.error(
         "RestException: {} {} {} {}",
         exception.getUniqueId(),
@@ -21,7 +21,7 @@ public class RestExceptionHandler {
 
     return ResponseEntity.status(exception.getHttpStatusCode())
         .body(
-            new RestErrorResponse(
+            new RestErrorResponse<>(
                 exception.getHttpStatusCode(),
                 exception.getUniqueId(),
                 exception.getErrorCode(),
@@ -30,7 +30,7 @@ public class RestExceptionHandler {
   }
 
   @ExceptionHandler(Exception.class)
-  public ResponseEntity<RestErrorResponse> handleUnexpected(Exception exception) {
+  public ResponseEntity<RestErrorResponse<?>> handleUnexpected(Exception exception) {
     log.error("Unhandled exception", exception);
     RestException wrapped =
         new RestException(
@@ -38,8 +38,8 @@ public class RestExceptionHandler {
             "Internal server error",
             org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR);
 
-    RestErrorResponse body =
-        new RestErrorResponse(
+    RestErrorResponse<?> body =
+        new RestErrorResponse<>(
             wrapped.getHttpStatusCode(),
             wrapped.getUniqueId(),
             wrapped.getErrorCode(),
