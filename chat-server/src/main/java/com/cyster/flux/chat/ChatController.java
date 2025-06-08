@@ -27,7 +27,13 @@ public class ChatController {
 
   @PostMapping
   @Operation(summary = "Send a chat message")
-  public Mono<ChatResult> chat(@RequestBody ChatRequest request) {
+  public Mono<ChatResult> chat(
+      @RequestBody ChatRequest request,
+      @RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
+    String bearerToken =
+        authorizationHeader != null && authorizationHeader.startsWith("Bearer ")
+            ? authorizationHeader.substring("Bearer ".length())
+            : null;
     if (request.prompt() == null || request.prompt().trim().isEmpty()) {
       return Mono.error(
           new RestException(
