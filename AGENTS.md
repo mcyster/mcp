@@ -3,10 +3,9 @@
 ## Nixos 
 Nixos is the default build environment
 
-To build or test this project, first install Nix and update channels:
+If you are on nixos or have the nix package manager avaliable
 
 ```bash
-apt-get update && apt-get install -y nix-bin
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 nix-channel --update
 ```
@@ -14,11 +13,21 @@ nix-channel --update
 Use `nix-shell shell.nix` to enter the development environment. **All** `gradle` commands must run inside this shell.
 
 ## Ubuntu 
+Ubuntu can be used as a development envioment
 
-If you are using Ubuntu and need to install the Java and Gradle tools manually,
-`UBUNTU_SETUP.md` contains a sample script that approximates the `shell.nix`
-configuration. Building and testing this project still requires running the
-commands inside `nix-shell shell.nix`.
+```bash
+sudo apt-get update
+sudo apt-get install -y openjdk-21-jdk gradle locales
+sudo locale-gen en_US.UTF-8
+sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+# ensure Java 21 is the default
+sudo update-alternatives --config java
+sudo update-alternatives --config javac
+
+# optional: set JAVA_HOME for the current shell
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
+```
 
 ## Gradle Commands
 

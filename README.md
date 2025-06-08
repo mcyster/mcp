@@ -17,15 +17,7 @@ Repo
 
 ## Setup
 
-1. If not already on a nix environment, install Nix and update channels (only needed once per environment):
-
-```bash
-apt-get update && apt-get install -y nix-bin 
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-nix-channel --update
-```
-
-2. Enter the development environment:
+Enter the development environment:
 
 ```bash
 nix-shell shell.nix
