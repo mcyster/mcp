@@ -1,0 +1,7 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    compileOnly 'com.fasterxml.jackson.core:jackson-annotations'
+}
