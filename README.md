@@ -40,6 +40,8 @@ gradle test
 gradle :mcp-app:bootJar
 gradle :mcp-server:runMcpTestSse
 gradle :mcp-server:runMcpTestStdio
+gradle spotlessCheck  # verify formatting
+gradle spotlessApply  # automatically format sources
 ```
 
 ## Configuration
