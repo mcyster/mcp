@@ -10,7 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(
-    scanBasePackageClasses = {ChatServer.class, WeatherServicePackageMarker.class, WeatherToolPackageMarker.class})
+    scanBasePackageClasses = {
+      ChatServer.class,
+      WeatherServicePackageMarker.class,
+      WeatherToolPackageMarker.class
+    })
 public class ChatServer {
   public static void main(String[] args) {
     SpringApplication.run(ChatServer.class, args);

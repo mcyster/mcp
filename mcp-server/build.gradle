@@ -7,7 +7,7 @@ plugins {
 dependencies {
     implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux"
     implementation project(':weather')
-    implementation project(':weather-tool')
+    implementation project(':weather:weather-tool')
     testImplementation "org.junit.jupiter:junit-jupiter"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }

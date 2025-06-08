@@ -14,7 +14,7 @@ dependencies {
     implementation 'io.modelcontextprotocol.sdk:mcp'
     implementation 'io.modelcontextprotocol.sdk:mcp-spring-webmvc'
     implementation project(':weather')
-    implementation project(':weather-tool')
+    implementation project(':weather:weather-tool')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
