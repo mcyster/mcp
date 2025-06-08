@@ -20,10 +20,10 @@ public class RestExceptionDocumentationConfig {
     @Bean
     public OperationCustomizer restExceptionCustomizer() {
         return (Operation operation, HandlerMethod handlerMethod) -> {
-            for (Class<?> ex : handlerMethod.getMethod().getExceptionTypes()) {
-                if (RestException.class.isAssignableFrom(ex)) {
+            for (Class<?> exceptionClass : handlerMethod.getMethod().getExceptionTypes()) {
+                if (RestException.class.isAssignableFrom(exceptionClass)) {
                     ApiResponse apiResponse = new ApiResponse()
-                            .description(buildDescription(ex))
+                            .description(buildDescription(exceptionClass))
                             .content(new Content().addMediaType(
                                     org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
                                     new MediaType().schema(
@@ -35,20 +35,20 @@ public class RestExceptionDocumentationConfig {
         };
     }
 
-    private String buildDescription(Class<?> ex) {
-        String description = ex.getSimpleName();
-        Class<?> enclosing = ex.getEnclosingClass();
-        if (enclosing != null) {
-            for (Class<?> nested : enclosing.getDeclaredClasses()) {
-                if (nested.isEnum() && nested.getSimpleName().endsWith("ErrorCode")) {
-                    String codes = Arrays.stream(nested.getEnumConstants())
+    private String buildDescription(Class<?> exceptionClass) {
+        String description = exceptionClass.getSimpleName();
+        Class<?> enclosingClass = exceptionClass.getEnclosingClass();
+        if (enclosingClass != null) {
+            for (Class<?> nestedClass : enclosingClass.getDeclaredClasses()) {
+                if (nestedClass.isEnum() && nestedClass.getSimpleName().endsWith("ErrorCode")) {
+                    String codes = Arrays.stream(nestedClass.getEnumConstants())
                             .map(constant -> {
                                 try {
-                                    Field f = nested.getField(((Enum<?>) constant).name());
-                                    io.swagger.v3.oas.annotations.media.Schema schema = f.getAnnotation(io.swagger.v3.oas.annotations.media.Schema.class);
-                                    String d = schema != null ? schema.description() : "";
-                                    return ((Enum<?>) constant).name() + (d.isBlank() ? "" : " - " + d);
-                                } catch (NoSuchFieldException e) {
+                                    Field field = nestedClass.getField(((Enum<?>) constant).name());
+                                    io.swagger.v3.oas.annotations.media.Schema schema = field.getAnnotation(io.swagger.v3.oas.annotations.media.Schema.class);
+                                    String descriptionText = schema != null ? schema.description() : "";
+                                    return ((Enum<?>) constant).name() + (descriptionText.isBlank() ? "" : " - " + descriptionText);
+                                } catch (NoSuchFieldException exception) {
                                     return ((Enum<?>) constant).name();
                                 }
                             })
