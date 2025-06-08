@@ -17,7 +17,7 @@ Repo
 
 ## Setup
 
-Enter the development environment:
+Enter the development environment (or setup the equivalent environment described by shell.nix)
 
 ```bash
 nix-shell shell.nix
