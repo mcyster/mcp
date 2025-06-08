@@ -8,6 +8,7 @@ import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -27,6 +28,14 @@ public class RestWebExceptionHandler implements ErrorWebExceptionHandler {
       return handleRestException(exchange, restException);
     }
 
+    if (throwable instanceof ResponseStatusException exception
+        && exception.getStatusCode() == HttpStatus.NOT_FOUND) {
+      RestException restException =
+          new RestException(
+              GlobalErrorCode.NOT_FOUND, "Endpoint not defined", HttpStatus.NOT_FOUND);
+      return handleRestException(exchange, restException);
+    }
+
     return Mono.error(throwable);
   }
 
@@ -38,7 +47,7 @@ public class RestWebExceptionHandler implements ErrorWebExceptionHandler {
       DataBufferFactory bufferFactory = exchange.getResponse().bufferFactory();
       DataBuffer buffer = bufferFactory.wrap(responseBody.getBytes());
 
-      exchange.getResponse().setStatusCode(HttpStatus.OK);
+      exchange.getResponse().setStatusCode(HttpStatus.valueOf(restException.httpStatusCode()));
       exchange.getResponse().getHeaders().add("Content-Type", MediaType.APPLICATION_JSON_VALUE);
 
       return exchange.getResponse().writeWith(Mono.just(buffer));
