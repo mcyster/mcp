@@ -1,7 +1,6 @@
 package com.cyster.flux.chat;
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
 import reactor.core.publisher.Mono;
 
 import org.springframework.ai.chat.model.ChatModel;

@@ -2,12 +2,7 @@ package com.cyster.flux.chat;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Map;
-
-import com.cyster.flux.chat.ErrorResponse;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /** Implementation of {@link ErrorResponse} returned from the exception handler. */
-
 @Schema(name = "RestErrorResponse", description = "Error body returned when a RestException is thrown")
 public record RestErrorResponse(
     @Schema(description = "HTTP status code of the error", example = "400")
@@ -15,7 +10,6 @@ public record RestErrorResponse(
     @Schema(description = "Unique identifier for tracking the error", example = "fa1ef2c2-cb51-4b62-8887-2fa8328bc8f2")
     String uniqueId,
     @Schema(description = "Application specific error code", example = "PROMPT_MISSING")
-    @JsonProperty("code")
     Enum<?> errorCode,
     @Schema(description = "Human readable error message", example = "No prompt was specified")
     String message,

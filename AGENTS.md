@@ -14,11 +14,21 @@ nix-channel --update
 Use `nix-shell shell.nix` to enter the development environment. **All** `gradle` commands must run inside this shell.
 
 ## Ubuntu 
+If you are working under Ubuntu thees  steps approximate the dependencies declared in `shell.nix`.
 
-If you are using Ubuntu and need to install the Java and Gradle tools manually,
-`UBUNTU_SETUP.md` contains a sample script that approximates the `shell.nix`
-configuration. Building and testing this project still requires running the
-commands inside `nix-shell shell.nix`.
+```bash
+sudo apt-get update
+sudo apt-get install -y openjdk-21-jdk gradle locales
+sudo locale-gen en_US.UTF-8
+sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+# ensure Java 21 is the default
+sudo update-alternatives --config java
+sudo update-alternatives --config javac
+
+# optional: set JAVA_HOME for the current shell
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
+```
 
 ## Gradle Commands
 
@@ -31,3 +41,10 @@ Common commands run inside the shell:
 
 These are the test commands used locally and should be executed within the Nix environment.
 
+### Process
+
+Before submitting a code review always run
+
+```
+gradle test
+```
