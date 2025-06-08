@@ -6,6 +6,7 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))
     }
+    modularity.inferModulePath = true
 }
 
 dependencies {
