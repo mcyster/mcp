@@ -31,7 +31,13 @@ public class ChatController {
     @Operation(summary = "Send a chat message")
     public Mono<ChatResult> chat(@RequestBody ChatRequest request) {
         if (request.prompt() == null || request.prompt().trim().isEmpty()) {
-            return Mono.error(new ChatException(ChatErrorCode.PROMPT_MISSING, "No prompt was specified"));
+            return Mono.error(new RestException(new ChatErrorResponse(
+                400,
+                java.util.UUID.randomUUID().toString(),
+                ChatErrorCode.PROMPT_MISSING,
+                "No prompt was specified",
+                java.util.Map.of()
+            )));
         }
 
         return chatClient.prompt()
@@ -41,7 +47,13 @@ public class ChatController {
             .content()
             .collectList()
             .map(list -> (ChatResult) new ChatResponse(String.join("", list)))
-            .onErrorMap(throwable -> new ChatException(ChatErrorCode.TOOL_FAILURE, "Chat processing failed: " + throwable.getMessage()));
+            .onErrorMap(throwable -> new RestException(new ChatErrorResponse(
+                400,
+                java.util.UUID.randomUUID().toString(),
+                ChatErrorCode.TOOL_FAILURE,
+                "Chat processing failed: " + throwable.getMessage(),
+                java.util.Map.of()
+            )));
     }
 
     @GetMapping("/tools")
@@ -88,11 +100,4 @@ public class ChatController {
         @Schema(description = "Tool call failed")
         TOOL_FAILURE
     }
-
-    public class ChatException extends RestException {
-        public ChatException(ChatErrorCode code, String message) {
-            super(code, message, HttpStatus.BAD_REQUEST);
-        }
-    }
-   
 } 

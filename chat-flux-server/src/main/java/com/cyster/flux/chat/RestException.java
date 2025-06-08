@@ -10,6 +10,14 @@ public class RestException extends RuntimeException implements ErrorResponse {
     private final HttpStatus status;
     private final Map<String, Object> parameters;
 
+    public RestException(ErrorResponse errorResponse) {
+        super(errorResponse.message());
+        this.uniqueId = errorResponse.uniqueId();
+        this.errorCode = errorResponse.errorCode();
+        this.status = HttpStatus.valueOf(errorResponse.httpStatusCode());
+        this.parameters = errorResponse.parameters();
+    }
+
     public RestException(Enum<?> errorCode, String message, HttpStatus status, Map<String, Object> parameters) {
         super(message);
         this.uniqueId = UUID.randomUUID().toString();
