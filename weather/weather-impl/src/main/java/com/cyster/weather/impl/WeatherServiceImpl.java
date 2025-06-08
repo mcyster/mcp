@@ -85,19 +85,19 @@ public class WeatherServiceImpl implements WeatherService {
             return "Could not retrieve forecast information for the given location.";
         }
 
-        String forecastText = forecast.properties().periods().stream().map(p ->
+        String forecastText = forecast.properties().periods().stream().map(period ->
             String.format("""
                     %s:
                     Temperature: %s %s
                     Wind: %s %s
                     Forecast: %s
                     """,
-                    p.name(),
-                    p.temperature(),
-                    p.temperatureUnit(),
-                    p.windSpeed(),
-                    p.windDirection(),
-                    p.detailedForecast())
+                    period.name(),
+                    period.temperature(),
+                    period.temperatureUnit(),
+                    period.windSpeed(),
+                    period.windDirection(),
+                    period.detailedForecast())
         ).collect(Collectors.joining());
 
         return forecastText;
@@ -113,18 +113,18 @@ public class WeatherServiceImpl implements WeatherService {
 
         return alert.features()
             .stream()
-            .map(f -> String.format("""
+            .map(feature -> String.format("""
                     Event: %s
                     Area: %s
                     Severity: %s
                     Description: %s
                     Instructions: %s
                     """,
-                    f.properties().event(),
-                    f.properties().areaDesc(),
-                    f.properties().severity(),
-                    f.properties().description(),
-                    f.properties().instruction()))
+                    feature.properties().event(),
+                    feature.properties().areaDesc(),
+                    feature.properties().severity(),
+                    feature.properties().description(),
+                    feature.properties().instruction()))
             .collect(Collectors.joining("\n"));
     }
 }
