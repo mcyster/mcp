@@ -1,6 +1,6 @@
 package com.cyster.weather.service;
 
-public sealed interface WeatherService permits com.cyster.weather.impl.WeatherServiceImpl {
+public interface WeatherService {
     String getWeatherForecastByLocation(double latitude, double longitude);
 
     String getAlerts(String state);
