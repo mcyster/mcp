@@ -22,3 +22,10 @@ Common commands run inside the shell:
 - `gradle :mcp-server:runMcpTestStdio`
 
 These are the test commands used locally and should be executed within the Nix environment.
+
+## Ubuntu Note
+
+If you are using Ubuntu and need to install the Java and Gradle tools manually,
+`UBUNTU_SETUP.md` contains a sample script that approximates the `shell.nix`
+configuration. Building and testing this project still requires running the
+commands inside `nix-shell shell.nix`.
