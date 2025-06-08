@@ -1,10 +1,11 @@
-# Spring MVC Chat Server
+
+# Spring AI Chat Server
 
 Start server:
-```bash
+```
 cd $MCP_HOME
 
-gradle :chat-mvp-server:bootRun
+gradle :chat-server:bootRun
 ```
 
 Prompt server:
