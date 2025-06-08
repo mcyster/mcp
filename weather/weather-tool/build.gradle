@@ -11,5 +11,6 @@ java {
 
 dependencies {
     implementation project(':weather')
-    implementation 'org.springframework.ai:spring-ai-autoconfigure-model-tool'
+    implementation 'org.springframework:spring-context:6.1.6'
+    implementation 'org.springframework.ai:spring-ai-model:1.0.0'
 }

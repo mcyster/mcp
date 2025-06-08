@@ -13,6 +13,5 @@ dependencies {
     // explicit Spring Framework versions are required for this standalone module
     implementation 'org.springframework:spring-web:6.1.6'
     implementation 'org.springframework:spring-context:6.1.6'
-    implementation 'org.springframework.ai:spring-ai-model:1.0.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 }
