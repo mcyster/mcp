@@ -3,6 +3,7 @@ package com.cyster.mcp;
 import org.springframework.ai.chat.model.ToolContext;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ai.mcp.McpToolUtils;
 import io.modelcontextprotocol.server.McpSyncServerExchange;
 
@@ -11,8 +12,11 @@ import org.slf4j.LoggerFactory;
 
 @Service
 public class ToolContextService {
-   
+
     private static final Logger logger = LoggerFactory.getLogger(ToolContextService.class);
+
+    @Value("${tool-context.home}")
+    private String home;
 
     @Tool(description = "Get the Model Context Protocol (MCP) Tool Context")
     public String getToolContext(ToolContext toolContext) {
@@ -32,9 +36,7 @@ public class ToolContextService {
         // McpServerSession session = exchange.getSession();
         // session.env();
 
-        // for now will pull API key from environment as work around
-        // won't work for non local server
-        String home = System.getenv("HOME");
+        // for now return configured home directory
         return "{ \"HOME\": \"" + home + "\" }";
     }
 }
