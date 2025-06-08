@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import com.cyster.rest.RestExceptionHandler;
 
 @WebFluxTest(ChatController.class)
 @Import(RestExceptionHandler.class)

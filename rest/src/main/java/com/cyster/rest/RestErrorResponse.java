@@ -1,4 +1,4 @@
-package com.cyster.flux.chat;
+package com.cyster.rest;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.cyster.flux.chat;
+package com.cyster.rest;
 
 import java.util.Map;
 import java.util.UUID;

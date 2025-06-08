@@ -11,6 +11,7 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-autoconfigure-model-chat-client'
     implementation 'org.springframework.ai:spring-ai-starter-model-openai'
     implementation 'org.springframework.ai:spring-ai-autoconfigure-model-openai'
+    implementation project(':rest')
     implementation 'io.modelcontextprotocol.sdk:mcp'
     implementation 'io.modelcontextprotocol.sdk:mcp-spring-webflux'
     implementation project(':weather')

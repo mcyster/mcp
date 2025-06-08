@@ -1,4 +1,4 @@
-package com.cyster.flux.chat;
+package com.cyster.rest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

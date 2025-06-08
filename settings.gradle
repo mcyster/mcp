@@ -21,6 +21,7 @@ dependencyResolutionManagement {
 rootProject.name = "mcp"
 include "mcp-server"
 include "chat-server"
+include "rest"
 include "mcp-tool"
 include "weather"
 include "weather:weather-tool"

@@ -1,4 +1,4 @@
-package com.cyster.flux.chat;
+package com.cyster.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;

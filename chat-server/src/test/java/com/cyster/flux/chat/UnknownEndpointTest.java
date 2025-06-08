@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import com.cyster.rest.RestWebExceptionHandler;
 
 @WebFluxTest(ChatController.class)
 @Import(RestWebExceptionHandler.class)
