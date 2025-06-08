@@ -1,6 +1,7 @@
 package com.cyster.flux.chat;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 import reactor.core.publisher.Mono;
 
 import org.springframework.ai.chat.model.ChatModel;
@@ -29,7 +30,7 @@ public class ChatController {
     @Operation(summary = "Send a chat message")
     public Mono<ChatResult> chat(@RequestBody ChatRequest request) {
         if (request.prompt() == null || request.prompt().trim().isEmpty()) {
-            return Mono.just(new ChatErrorResponse(ChatErrorCode.PROMPT_MISSING, "No prompt was specified"));
+            return Mono.error(new ChatException(ChatErrorCode.PROMPT_MISSING, "No prompt was specified"));
         }
 
         return chatClient.prompt()
@@ -39,7 +40,7 @@ public class ChatController {
             .content()
             .collectList()
             .map(list -> (ChatResult) new ChatResponse(String.join("", list)))
-            .onErrorReturn(new ChatErrorResponse(ChatErrorCode.TOOL_FAILURE, "Chat processing failed"));
+            .onErrorMap(throwable -> new ChatException(ChatErrorCode.TOOL_FAILURE, "Chat processing failed: " + throwable.getMessage()));
     }
 
     @GetMapping("/tools")
@@ -79,6 +80,12 @@ public class ChatController {
 
         @Schema(description = "Tool call failed")
         TOOL_FAILURE
+    }
+
+    public class ChatException extends RestException {
+        public ChatException(ChatErrorCode code, String message) {
+            super(code, message, HttpStatus.BAD_REQUEST);
+        }
     }
    
 } 

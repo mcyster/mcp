@@ -45,4 +45,15 @@ public class RestException extends RuntimeException {
     public Map<String, Object> getParameters() {
         return parameters;
     }
+
+    public RestExceptionResponse toRestExceptionResponse() {
+        return new RestExceptionResponse(uniqueId, errorCode, getMessage(), parameters);
+    }
+
+    public record RestExceptionResponse(
+        String uniqueId,
+        Enum<?> errorCode,
+        String message,
+        Map<String, Object> parameters
+    ) {}
 } 
