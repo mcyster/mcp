@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import java.util.Map;
 import java.util.UUID;
 
-public class RestException extends Exception {
+public class RestException extends Exception implements ErrorResponse {
     private final Enum<?> errorCode;
     private final HttpStatus status;
     private final Map<String, Object> parameters;
@@ -27,18 +27,22 @@ public class RestException extends Exception {
         this(errorCode, message, HttpStatus.BAD_REQUEST, Map.of());
     }
 
+    @Override
     public String getUniqueId() {
         return UUID.randomUUID().toString();
     }
 
+    @Override
     public Enum<?> getErrorCode() {
         return errorCode;
     }
 
-    public HttpStatus getHttpStatusCode() {
-        return status;
+    @Override
+    public int getHttpStatusCode() {
+        return status.value();
     }
 
+    @Override
     public Map<String, Object> getParameters() {
         return parameters;
     }

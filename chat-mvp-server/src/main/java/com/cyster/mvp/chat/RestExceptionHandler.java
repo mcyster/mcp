@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.Map;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
@@ -17,7 +16,7 @@ public class RestExceptionHandler {
         
         return ResponseEntity
             .status(exception.getHttpStatusCode())
-            .body(new RestErrorResponse(exception.getHttpStatusCode().value(), exception.getUniqueId(), exception.getErrorCode(), exception.getMessage(), exception.getParameters()));
+            .body(new RestErrorResponse(exception.getHttpStatusCode(), exception.getUniqueId(), exception.getErrorCode(), exception.getMessage(), exception.getParameters()));
     }
 
     @ExceptionHandler(Exception.class)
@@ -25,10 +24,16 @@ public class RestExceptionHandler {
         log.error("Unhandled exception", exception);
         RestException wrapped = new RestException(null, "Internal server error", org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR);
 
+        RestErrorResponse body = new RestErrorResponse(
+            wrapped.getHttpStatusCode(),
+            wrapped.getUniqueId(),
+            wrapped.getErrorCode(),
+            wrapped.getMessage(),
+            wrapped.getParameters());
+
         return ResponseEntity
             .status(wrapped.getHttpStatusCode())
-            .body(new RestErrorResponse(wrapped.getHttpStatusCode().value(), wrapped.getUniqueId(), wrapped.getErrorCode(), wrapped.getMessage(), wrapped.getParameters()));
+            .body(body);
     }
 
-    public record RestErrorResponse(int httpStatusCode, String uniqueId, Enum<?> code, String message, Map<String, Object> parameters) {}
 } 

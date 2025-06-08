@@ -64,6 +64,14 @@ public class ChatController {
             String response
     ) {}
 
+    @Schema(description = "Chat error response for validation and processing errors")
+    public static record ChatErrorResponse(
+            @Schema(description = "Specific error code indicating the type of error")
+            ChatErrorCode code,
+            @Schema(description = "Human-readable error message")
+            String message
+    ) {}
+
     public static enum ChatErrorCode {
         @Schema(description = "Prompt was empty or missing")
         PROMPT_MISSING,
