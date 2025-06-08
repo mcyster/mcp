@@ -47,4 +47,5 @@ Before submitting a code review always run
 
 ```
 gradle test
+gradle spotlessCheck 
 ```
