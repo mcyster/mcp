@@ -33,7 +33,7 @@ public class ChatController {
     String bearerToken =
         authorizationHeader != null && authorizationHeader.startsWith("Bearer ")
             ? authorizationHeader.substring("Bearer ".length())
-            : null;
+            : "invalid";
     if (request.prompt() == null || request.prompt().trim().isEmpty()) {
       return Mono.error(
           new RestException(
