@@ -48,6 +48,7 @@ public class ChatController {
     return chatClient
         .prompt()
         .user(request.prompt())
+        .toolContext(java.util.Map.of("bearerToken", bearerToken))
         .toolCallbacks(Arrays.asList(toolCallbackProvider.getToolCallbacks()))
         .stream()
         .content()
