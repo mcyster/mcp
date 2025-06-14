@@ -34,6 +34,8 @@ subprojects {
         imports {
             mavenBom "org.springframework.ai:spring-ai-bom:1.0.0"
             mavenBom "io.modelcontextprotocol.sdk:mcp-bom:0.10.0"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:3.5.0"
+            mavenBom "org.springdoc:springdoc-openapi-bom:2.8.9"
         }
     }
 
