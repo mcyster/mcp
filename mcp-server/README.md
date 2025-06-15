@@ -10,6 +10,8 @@ cd $MCP_HOME
 gradle :mcp-server:bootRun
 ```
 
+Once running, browse to [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) to view the generated API documentation.
+
 Setup an MCP entry in cursor:
 
 $MCP_HOME/.cursor/mcp.json
@@ -168,7 +170,6 @@ These commands where derived by running `gradle :mcp-app:runMcpTestSse` and aski
 Build mcp-app.jar
 ```
 cd mcp
-nix-shell
 gradle :mcp-app:bootJar
 ```
 

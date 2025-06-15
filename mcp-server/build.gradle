@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     implementation "org.springframework.ai:spring-ai-starter-mcp-server-webflux"
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui'
     implementation project(':weather')
     implementation project(':weather:weather-tool')
     testImplementation "org.junit.jupiter:junit-jupiter"

@@ -11,7 +11,8 @@ nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 nix-channel --update
 ```
 
-Use `nix-shell shell.nix` to enter the development environment. **All** `gradle` commands must run inside this shell.
+You can optionally enter a Nix shell using `nix-shell shell.nix`, but on Ubuntu
+the tools can be run directly without it.
 
 ## Ubuntu 
 If you are working under Ubuntu thees  steps approximate the dependencies declared in `shell.nix`.
@@ -32,14 +33,14 @@ export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
 
 ## Gradle Commands
 
-Common commands run inside the shell:
+Common commands run from the project root:
 
 - `gradle test`
 - `gradle :mcp-app:bootJar`
 - `gradle :mcp-server:runMcpTestSse`
 - `gradle :mcp-server:runMcpTestStdio`
 
-These are the test commands used locally and should be executed within the Nix environment.
+These are the test commands used locally.
 
 ### Process
 
