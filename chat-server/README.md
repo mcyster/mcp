@@ -20,7 +20,7 @@ curl -s  -H "Content-Type: application/json" http://localhost:9000/chat/tools | 
 ```
 
 When the server is running check the api:
-- [Swagger Description](http://localhost:9000/webjars/swagger-ui/index.html)
+- [Swagger Description](http://localhost:9000/swagger-ui.html)
 - [ApI Docs](http://localhost:9000/v3/api-docs)
 
 

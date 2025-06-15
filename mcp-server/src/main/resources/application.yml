@@ -6,3 +6,8 @@ logging:
 
 tool-context:
   home: ${TOOL_CONTEXT_HOME:${HOME}}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true

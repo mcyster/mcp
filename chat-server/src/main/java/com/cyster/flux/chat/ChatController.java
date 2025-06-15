@@ -2,8 +2,6 @@ package com.cyster.flux.chat;
 
 import com.cyster.rest.ErrorResponse;
 import com.cyster.rest.RestException;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +24,6 @@ public class ChatController {
   }
 
   @PostMapping
-  @Operation(summary = "Send a chat message")
   public Mono<ChatResult> chat(
       @RequestBody ChatRequest request,
       @RequestHeader(value = "Authorization", required = false) String authorizationHeader) {
@@ -66,30 +63,19 @@ public class ChatController {
   }
 
   @GetMapping("/tools")
-  @Operation(summary = "List available tools")
   public List<String> tools() {
     return Arrays.stream(toolCallbackProvider.getToolCallbacks())
         .map(toolCallback -> toolCallback.getToolDefinition().name())
         .toList();
   }
 
-  @Schema(description = "Chat request containing user prompt")
-  public record ChatRequest(
-      @Schema(description = "User message or question", example = "What is the weather like today?")
-          String prompt) {}
-  ;
+  public record ChatRequest(String prompt) {}
 
-  @Schema(oneOf = {ChatResponse.class, ChatErrorResponse.class})
   public sealed interface ChatResult permits ChatResponse, ChatErrorResponse {}
 
-  @Schema(description = "Chat response containing AI-generated content")
-  public record ChatResponse(@Schema(description = "AI-generated response text") String response)
+  public record ChatResponse(String response)
       implements ChatResult {}
-  ;
 
-  @Schema(
-      description = "Chat error response for validation and processing errors",
-      allOf = {ErrorResponse.class})
   public static record ChatErrorResponse(
       int httpStatusCode,
       String uniqueId,
@@ -99,10 +85,7 @@ public class ChatController {
       implements ChatResult, ErrorResponse<ChatErrorCode> {}
 
   public static enum ChatErrorCode {
-    @Schema(description = "Prompt was empty or missing")
     PROMPT_MISSING,
-
-    @Schema(description = "Tool call failed")
     TOOL_FAILURE
   }
 }
