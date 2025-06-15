@@ -17,17 +17,13 @@ Repo
 
 ## Setup
 
-### Using Ubuntu
+### Ubuntu
 
 Installing Java 21 and Gradle:
 
 ```bash
 sudo apt-get install -y openjdk-21-jdk gradle locales
-sudo locale-gen en_US.UTF-8
-sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 ```
-
-Do not install everything described in shell.nix
 
 After installation ensure Java 21 is selected:
 
@@ -39,7 +35,7 @@ sudo update-alternatives --config javac
 With Java and Gradle installed, run the standard Gradle commands from the
 project root.
 
-### Using Nix
+### Nix
 
 If you prefer the full Nix environment install Nix and update channels:
 
@@ -53,8 +49,6 @@ Then enter the shell:
 ```bash
 nix-shell shell.nix
 ```
-
-All Gradle tasks should be executed via the wrapper script `./gradlew`.
 
 ### Common Gradle commands
 

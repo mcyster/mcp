@@ -167,8 +167,6 @@ These commands where derived by running `gradle :mcp-app:runMcpTestSse` and aski
 
 Build mcp-app.jar
 ```
-cd mcp
-nix-shell
 gradle :mcp-app:bootJar
 ```
 
