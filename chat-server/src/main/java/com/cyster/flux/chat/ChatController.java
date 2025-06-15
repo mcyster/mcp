@@ -73,8 +73,7 @@ public class ChatController {
 
   public sealed interface ChatResult permits ChatResponse, ChatErrorResponse {}
 
-  public record ChatResponse(String response)
-      implements ChatResult {}
+  public record ChatResponse(String response) implements ChatResult {}
 
   public static record ChatErrorResponse(
       int httpStatusCode,

@@ -9,9 +9,5 @@ public record AlertResponse(List<Alert> alerts) {
 
   /** Information about a single alert. */
   public record Alert(
-      String event,
-      String area,
-      String severity,
-      String description,
-      String instruction) {}
+      String event, String area, String severity, String description, String instruction) {}
 }
