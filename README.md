@@ -17,21 +17,44 @@ Repo
 
 ## Setup
 
-1. If not already on a nix environment, install Nix and update channels (only needed once per environment):
+### Using Ubuntu
+
+Installing Java 21 and Gradle:
 
 ```bash
-apt-get update && apt-get install -y nix-bin 
+sudo apt-get install -y openjdk-21-jdk gradle locales
+sudo locale-gen en_US.UTF-8
+sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+```
+
+Do not install everything described in shell.nix
+
+After installation ensure Java 21 is selected:
+
+```bash
+sudo update-alternatives --config java
+sudo update-alternatives --config javac
+```
+
+With Java and Gradle installed, run the standard Gradle commands from the
+project root.
+
+### Using Nix
+
+If you prefer the full Nix environment install Nix and update channels:
+
+```bash
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 nix-channel --update
 ```
 
-2. Enter the development environment:
+Then enter the shell:
 
 ```bash
 nix-shell shell.nix
 ```
 
-All `gradle` commands must be run inside this shell.
+All Gradle tasks should be executed via the wrapper script `./gradlew`.
 
 ### Common Gradle commands
 

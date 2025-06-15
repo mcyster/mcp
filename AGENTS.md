@@ -1,23 +1,9 @@
 # Repo Guidelines for Codex
 
-## Nixos 
-Nixos is the default build environment
-
-To build or test this project, first install Nix and update channels:
-
-```bash
-apt-get update && apt-get install -y nix-bin
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-nix-channel --update
-```
-
-Use `nix-shell shell.nix` to enter the development environment. **All** `gradle` commands must run inside this shell.
-
 ## Ubuntu 
 If you are working under Ubuntu thees  steps approximate the dependencies declared in `shell.nix`.
 
 ```bash
-sudo apt-get update
 sudo apt-get install -y openjdk-21-jdk gradle locales
 sudo locale-gen en_US.UTF-8
 sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
@@ -49,3 +35,4 @@ Before submitting a code review always run
 gradle test
 gradle spotlessCheck 
 ```
+
